@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="it.unibz.types.Tweets" table="TWEETS">
+   <id name="id" type="long" column="ID" >
+   <generator class="increment"/>
+  </id>
+
+  <property name="author">
+     <column name="AUTHOR" />
+  </property>
+  <property name="text">
+    <column name="TEXT"/>
+  </property>
+  <property name="ownerName">
+    <column name="OWNERNAME"/>
+  </property>
+    <property name="baseid">
+    <column name="BASEID"/>
+  </property>
+ </class>
+</hibernate-mapping>

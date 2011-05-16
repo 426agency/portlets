@@ -15,7 +15,16 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored ="false" %>
 
 <portlet:defineObjects />
 
-This is the <b>EDIT projectPortlet</b> portlet.
+<portlet:actionURL var="submitForm" portletMode="view"/>
+<portlet:defineObjects />
+
+<form style="width: 100%" method="post" action="${submitForm}">
+    Pin: <input type="text" size="10" name="twitterpin" />
+<input type="submit" value="Submit"/>
+</form>
+<br>

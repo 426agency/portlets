@@ -2,4 +2,7 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" uri="java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"/>
     <system systemId="http://www.w3.org/2001/xml.xsd" uri="www.w3.org/2001/xml.xsd"/>
+    <system systemId="http://www.springframework.org/schema/context/spring-context-3.0.xsd" uri="www.springframework.org/schema/context/spring-context-3.0.xsd"/>
+    <system systemId="http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" uri="www.springframework.org/schema/beans/spring-beans-3.0.xsd"/>
+    <system systemId="http://www.springframework.org/schema/tool/spring-tool-3.0.xsd" uri="www.springframework.org/schema/tool/spring-tool-3.0.xsd"/>
 </catalog>
