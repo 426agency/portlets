@@ -1,40 +1,48 @@
 package it.unibz.dao;
 
+import it.unibz.types.Login;
 import it.unibz.types.Tweets;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import twitter4j.auth.AccessToken;
 
 
 public class TwitterDaoHibernate extends HibernateDaoSupport implements TwitterDao {
   private static final String BASE_CONTACTS_QUERY =
       "from " + Tweets.class.getName() + " c ";
   
-  private static final String PUBLIC_CONTACTS_QUERY = 
-      BASE_CONTACTS_QUERY + 
-      "where c.ownerName is null";
-  
-  private static final String USER_CONTACTS_QUERY =
-      BASE_CONTACTS_QUERY + " where c.ownerName = ?";
-  
-  private static final String SEARCH_PUBLIC_CONTACTS_QUERY =
-      BASE_CONTACTS_QUERY +
-      " where c.ownerName is null " +
-      " and c.lastName LIKE ?";
 
-  private static final String SEARCH_USER_CONTACTS_QUERY =
-      BASE_CONTACTS_QUERY +
-      " where (c.ownerName is null or c.ownerName = ?) " +
-      " and c.lastName = ?";
   
   public TwitterDaoHibernate() {}
+
+  public AccessToken loadAccessToken(long useId){
+        Transaction t = null;
+ //     session =sessionFactory.openSession();
+       // System.out.println("load access for user"+useId);
+Session session = SessionFactoryUtil.getInstance().getCurrentSession();
+t=session.beginTransaction();
+ List ret = null;
+    try {
+      ret = session.createQuery("from "+Login.class.getName()+" where BASEID = "+useId+"").list();
+t.commit();
+    }
+    catch(HibernateException he){
+    }
+//System.out.println("ret size"+ret.size());
+    if(ret.size()>0)
+      return new AccessToken(((Login)ret.get(0)).getaccesskey(), ((Login)ret.get(0)).getaccesstoken());
+    else
+        return null;
+   // String token = // load from a persistent store
+    //String tokenSecret = // load from a persistent store
+    //return new AccessToken("241950624-tbJdWcp4Bbl7HZ3YaaS4TGB1vDQ7kM2T1VtDrTDa","4d6CbEqw0aZQVDGam9es7xACDfqbrQqy1teXe0Fec");
+  }
 
   private List findAllTweets(String user) {
       List ret = null;
@@ -86,4 +94,27 @@ t.commit();
         return count;
     }
 
+
+    public void storeAccesstoken(String token, String tokenSecret, long userId) {
+         Transaction t = null;
+ //     session =sessionFactory.openSession();
+Session session = SessionFactoryUtil.getInstance().getCurrentSession();
+t=session.beginTransaction();
+session.save(new Login(token,tokenSecret,userId));
+t.commit();
+    }
+
+    public void logout(long userId) {
+        Transaction t = null;
+        //System.out.println(userId);
+
+ //     session =sessionFactory.openSession();
+session = SessionFactoryUtil.getInstance().getCurrentSession();
+t=session.beginTransaction();
+         Query query = session.createQuery("DELETE from "+Login.class.getName()+
+                 " as t where t.baseid="+userId);
+         query.executeUpdate();
+         session.flush();
+t.commit();
+    }
 }

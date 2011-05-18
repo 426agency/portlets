@@ -5,8 +5,12 @@
 
 package it.unibz.twitterportlet;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.User;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -16,6 +20,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletException;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -24,7 +29,6 @@ import twitter4j.IDs;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
-import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.Authorization;
 import twitter4j.auth.OAuthAuthorization;
@@ -43,6 +47,8 @@ public class TwitterFollower extends GenericPortlet {
 		editJSP = getInitParameter("edit-jsp");
 		helpJSP = getInitParameter("help-jsp");
 		viewJSP = getInitParameter("follower-jsp");
+                                errorJSP = getInitParameter("error-jsp");
+
 	}
 
 	public void doDispatch(
@@ -92,18 +98,25 @@ String msg=renderRequest.getParameter("msg");
         if(!testNullOrEmpty(msg))
             renderRequest.setAttribute("msg",msg);
     String message="";
+            User u =getCurrentPortalUser(renderRequest);
+          if(u==null||u.getEmailAddress().contains("guest")||!TwitterComponent.hasaccount(u.getUserId())){
+              include(errorJSP,renderRequest,renderResponse);
+          }
+
+else{
 
         try {
             // Status status = twitter.updateStatus(args[1]);
             message+="<table>";
-            long[] arrayLngIDs = TwitterComponent.getTwitter().getFriendsIDs("Fbihack",-1).getIDs();
+            Twitter twit=TwitterComponent.getTwitter(u.getUserId());
+            long[] arrayLngIDs = twit.getFriendsIDs(-1).getIDs();
             PortletURL action = renderResponse.createActionURL();
-            User u =null;
+            twitter4j.User twitteruser =null;
             for(int i=0;i<arrayLngIDs.length;i++){
-                u = TwitterComponent.getTwitter().showUser(arrayLngIDs[i]);
+                twitteruser = twit.showUser(arrayLngIDs[i]);
                 action = renderResponse.createActionURL();
                 action.setParameter("followerID",String.valueOf(arrayLngIDs[i]) );
-    message+="<tr><td>"+u.getScreenName()+"</td><td><a href=\""+action.toString()+
+    message+="<tr><td>"+twitteruser.getScreenName()+"</td><td><a href=\""+action.toString()+
             "\"><img src=\"/twitterfollower-portlet/images/trash.gif\" border=\"0\""
             + " title=\"Unfollow\"></a></td></tr>";
             }
@@ -118,24 +131,23 @@ String msg=renderRequest.getParameter("msg");
         include(viewJSP, renderRequest, renderResponse);
 
     }
-        //           "241950624-tbJdWcp4Bbl7HZ3YaaS4TGB1vDQ7kM2T1VtDrTDa","4d6CbEqw0aZQVDGam9es7xACDfqbrQqy1teXe0Fec");
-
-        private static AccessToken loadAccessToken(int useId){
-   // String token = // load from a persistent store
-    //String tokenSecret = // load from a persistent store
-    return new AccessToken("241950624-tbJdWcp4Bbl7HZ3YaaS4TGB1vDQ7kM2T1VtDrTDa","4d6CbEqw0aZQVDGam9es7xACDfqbrQqy1teXe0Fec");
-  }
-
+        }
+      
 
 
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 
+                        User u =getCurrentPortalUser(actionRequest);
+if(u==null||u.getEmailAddress().contains("guest")||!TwitterComponent.hasaccount(u.getUserId())){
+          }
+ else{
             if(actionRequest.getParameter("followerID")!=null)
             {
             try {
-                TwitterComponent.getTwitter().destroyFriendship(Integer.parseInt(actionRequest.getParameter("followerID")));
+
+                TwitterComponent.getTwitter(u.getUserId()).destroyFriendship(Integer.parseInt(actionRequest.getParameter("followerID")));
             } catch (TwitterException ex) {
                 Logger.getLogger(TwitterFollower.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -144,14 +156,14 @@ String msg=renderRequest.getParameter("msg");
             {
                  String followerName = actionRequest.getParameter("followername");
                  try {
-                    TwitterComponent.getTwitter().createFriendship(followerName);
+                    TwitterComponent.getTwitter(u.getUserId()).createFriendship(followerName);
             } catch (TwitterException ex) {
                 actionResponse.setRenderParameter("msg", "Unable to follow user: "+followerName);
 
                 Logger.getLogger(TwitterFollower.class.getName()).log(Level.SEVERE, null, ex);
             }
                  
-            }
+            }}
 }
 
 
@@ -174,7 +186,22 @@ String msg=renderRequest.getParameter("msg");
 	protected String editJSP;
 	protected String helpJSP;
 	protected String viewJSP;
+        protected String errorJSP;
 
 	private static Log _log = LogFactoryUtil.getLog(TwitterFollower.class);
+
+    private User getCurrentPortalUser(PortletRequest renderRequest) {
+        User ret=null;
+        try {
+             ret = PortalUtil.getUser(renderRequest);
+        } catch (PortalException ex) {
+            Logger.getLogger(TwitterMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SystemException ex) {
+            Logger.getLogger(TwitterMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+        return ret;
+        }
+    }
 
 }

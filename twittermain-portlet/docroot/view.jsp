@@ -26,7 +26,7 @@
     <p style="color:red">You have ${numtweets} new Tweet!</p>
 </c:if>
 <form style="width: 100%" method="post" action="${submitForm}">
-    Tweet: <input type="text" size="100" name="tweettext" />
+    Tweet: <input type="text" size="75" maxlength="140" name="tweettext" />
 <input type="submit" value="Submit"/>
 </form>
 <br>

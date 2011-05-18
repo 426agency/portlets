@@ -22,9 +22,8 @@
 
 <portlet:actionURL var="submitForm" portletMode="view"/>
 <portlet:defineObjects />
-
+<br>
 <form style="width: 100%" method="post" action="${submitForm}">
     Pin: <input type="text" size="10" name="twitterpin" />
 <input type="submit" value="Submit"/>
 </form>
-<br>

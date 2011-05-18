@@ -1,6 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isErrorPage="true"%>
-<html>
-  <head><title>Error</title></head>
-  <body>Failed to connect to the Twitter API<br>
-  ${exception.message}</body>
-</html>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+
+
+<portlet:defineObjects />
+<h2>You are not allowed to see this content.</h2>
+<h3>Please login using the Twitter Login portlet</h3>
