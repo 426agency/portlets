@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<portlet-app
+	version="2.0"
+	xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+>
+    <portlet>
+        <portlet-name>AcquireInfo</portlet-name>
+        <display-name>AcquireInfo</display-name>
+        <portlet-class>it.unibz.aws.ui.portlet.AcquireInfoPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/view.jsp</value>
+        </init-param>
+        <init-param>
+            <name>help-jsp</name>
+            <value>/help.jsp</value>
+        </init-param>
+        <init-param>
+            <name>greeting-jsp</name>
+            <value>/greetings.jsp</value>
+        </init-param>
+        <init-param>
+            <name>form-jsp</name>
+            <value>/form.jsp</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+            <portlet-mode>help</portlet-mode>
+        </supports>
+        <portlet-info>
+            <title>AcquireInfo</title>
+            <short-title>AcquireInfo</short-title>
+            <keywords>AcquireInfo</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>guest</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>power-user</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>user</role-name>
+        </security-role-ref>
+        <supported-publishing-event>
+            <qname xmlns:x="it.unibz.aws/events">x:firstName</qname>
+        </supported-publishing-event>
+        <supported-public-render-parameter>tag</supported-public-render-parameter>
+    </portlet>
+    <portlet>
+        <portlet-name>Welcome</portlet-name>
+        <display-name>Welcome Portlet</display-name>
+        <portlet-class>it.unibz.aws.ui.portlet.WelcomePortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/welcome.jsp</value>
+        </init-param>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <portlet-info>
+            <title>Welcome Portlet</title>
+            <short-title>Welcome Portlet</short-title>
+            <keywords>Welcome Portlet</keywords>
+        </portlet-info>
+        <supported-processing-event>
+            <qname xmlns:x="it.unibz.aws/events">x:firstName</qname>
+        </supported-processing-event>
+        <supported-public-render-parameter>tag</supported-public-render-parameter>
+    </portlet>
+    <event-definition>
+        <qname xmlns:x="it.unibz.aws/events">x:firstName</qname>
+        <value-type>java.lang.String</value-type>
+    </event-definition>
+    <public-render-parameter>
+        <identifier>tag</identifier>
+        <qname xmlns:x="it.unibz.aws/events">x:tag</qname>
+    </public-render-parameter>
+</portlet-app>

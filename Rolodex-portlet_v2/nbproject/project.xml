@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.ant.freeform</type>
+    <configuration>
+        <general-data xmlns="http://www.netbeans.org/ns/freeform-project/1">
+            <name>portlet</name>
+        </general-data>
+        <general-data xmlns="http://www.netbeans.org/ns/freeform-project/2">
+            <!-- Do not use Project Properties customizer when editing this file manually. -->
+            <name>portlet</name>
+            <properties/>
+            <folders>
+                <source-folder>
+                    <label>portlet</label>
+                    <location>.</location>
+                    <encoding>UTF-8</encoding>
+                </source-folder>
+                <source-folder>
+                    <label>docroot\WEB-INF\src</label>
+                    <type>java</type>
+                    <location>docroot/WEB-INF/src</location>
+                    <encoding>UTF-8</encoding>
+                </source-folder>
+            </folders>
+            <ide-actions>
+                <action name="build">
+                    <target>compile</target>
+                </action>
+                <action name="clean">
+                    <target>clean</target>
+                </action>
+                <action name="rebuild">
+                    <target>clean</target>
+                    <target>compile</target>
+                </action>
+                <action name="run">
+                    <target>deploy</target>
+                </action>
+            </ide-actions>
+            <view>
+                <items>
+                    <source-folder style="packages">
+                        <label>docroot\WEB-INF\src</label>
+                        <location>docroot/WEB-INF/src</location>
+                    </source-folder>
+                    <source-file>
+                        <location>build.xml</location>
+                    </source-file>
+                </items>
+                <context-menu>
+                    <ide-action name="build"/>
+                    <ide-action name="rebuild"/>
+                    <ide-action name="clean"/>
+                    <ide-action name="run"/>
+                </context-menu>
+            </view>
+            <subprojects/>
+        </general-data>
+        <java-data xmlns="http://www.netbeans.org/ns/freeform-project-java/1">
+            <compilation-unit>
+                <package-root>docroot/WEB-INF/src</package-root>
+                <classpath mode="compile">docroot/WEB-INF/lib/antlr-2.7.6.jar:docroot/WEB-INF/lib/aopalliance-1.0.jar:docroot/WEB-INF/lib/asm-1.5.3.jar:docroot/WEB-INF/lib/asm-attrs-1.5.3.jar:docroot/WEB-INF/lib/avalon-framework-4.1.3.jar:docroot/WEB-INF/lib/cglib-2.1_3.jar:docroot/WEB-INF/lib/commons-beanutils-1.7.0.jar:docroot/WEB-INF/lib/commons-collections-2.1.1.jar:docroot/WEB-INF/lib/commons-logging-1.1.jar:docroot/WEB-INF/lib/displaytag-1.1.jar:docroot/WEB-INF/lib/displaytag-portlet-1.1.1.jar:docroot/WEB-INF/lib/dom4j-1.6.1.jar:docroot/WEB-INF/lib/ehcache-1.2.jar:docroot/WEB-INF/lib/hibernate-3.2.0.cr4.jar:docroot/WEB-INF/lib/hibernate-annotations-3.2.0.cr2.jar:docroot/WEB-INF/lib/hsqldb-1.8.0.7.jar:docroot/WEB-INF/lib/itext-1.3.jar:docroot/WEB-INF/lib/jstl-1.1.2.jar:docroot/WEB-INF/lib/jta-1.0.1B.jar:docroot/WEB-INF/lib/logkit-1.0.1.jar:docroot/WEB-INF/lib/persistence-api-1.0.jar:docroot/WEB-INF/lib/spring-2.5.5.jar:docroot/WEB-INF/lib/standard-1.1.2.jar:docroot/WEB-INF/lib/org.springframework.orm-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.web-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.web.portlet-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/persistence-api-1.0.jar:docroot/WEB-INF/lib/org.springframework.aop-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.asm-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.aspects-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.beans-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.context-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.context.support-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.core-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.expression-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.instrument-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.instrument.tomcat-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.jdbc-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.jms-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.orm-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.oxm-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.test-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.transaction-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.web-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.web.portlet-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.web.servlet-3.0.4.RELEASE.jar:docroot/WEB-INF/lib/org.springframework.web.struts-3.0.4.RELEASE.jar:/shared/server/liferay-portal-6.0.5/tomcat-6.0.26/lib/ext/portal-service.jar:/shared/server/liferay-portal-6.0.5/tomcat-6.0.26/lib/ext/portlet.jar:docroot/WEB-INF/lib/commons-lang.jar</classpath>
+                <source-level>1.5</source-level>
+            </compilation-unit>
+        </java-data>
+        <preferences xmlns="http://www.netbeans.org/ns/auxiliary-configuration-preferences/1">
+            <module name="org-netbeans-modules-editor-indent">
+                <node name="CodeStyle">
+                    <property name="usedProfile" value="default"/>
+                    <node name="project">
+                        <property name="tab-size" value="8"/>
+                        <property name="text-limit-width" value="80"/>
+                    </node>
+                </node>
+            </module>
+        </preferences>
+    </configuration>
+</project>

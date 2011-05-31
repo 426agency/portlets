@@ -72,7 +72,7 @@ public class Login implements Serializable{
   public void setId(long l) {
     id = l;
   }
-  @Column(length=20)
+  @Column(length=100)
   public String getaccesskey() {
     return accesskey;
   }

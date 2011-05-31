@@ -18,15 +18,15 @@ public class Tweets implements Serializable {
     private String author=null;
     private String text=null;
     private long id;
-      private String ownerName;
+      private String ownername;
       private long baseid;
 
-      public Tweets(){}
+    public Tweets(){}
 
-    public Tweets(String author,String text, long baseid, String owner){
+    public Tweets(String author,String text, long baseid, String ownername){
         this.author=author;
         this.text=text;
-        this.ownerName=owner;
+        this.ownername=ownername;
         this.baseid=baseid;
     }
 
@@ -41,7 +41,7 @@ public class Tweets implements Serializable {
   /**
    * @return Tweet
    */
-    @Column(length=250)
+    @Column(length=500)
   public String getText() {
     return text;
   }
@@ -49,7 +49,7 @@ public class Tweets implements Serializable {
   /**
    * @return Author
    */
-    @Column(length=100)
+    @Column(length=255)
   public String getAuthor() {
     return author;
   }
@@ -83,12 +83,13 @@ public class Tweets implements Serializable {
   public void setId(long l) {
     id = l;
   }
-  @Column(length=20)
-  public String getOwnerName() {
-    return ownerName;
+  
+  @Column(length=255)
+  public String getOwnername() {
+    return ownername;
   }
 
-  public void setOwnerName(String ownerName) {
-    this.ownerName = ownerName;
+  public void setOwnername(String ownername) {
+    this.ownername = ownername;
   }
 }

@@ -9,33 +9,29 @@
 	<portlet>
 		<portlet-name>Twitter Suite</portlet-name>
 		<display-name>Twitter Main Portlet</display-name>
-		<portlet-class>it.unibz.twitterportlet.TwitterMain</portlet-class>
+		<portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name><value>/view.jsp</value>
-</init-param>
-<init-param>
-			<name>edit-jsp</name><value>/edit.jsp</value>
-</init-param>
-<init-param>
-			<name>error-jsp</name><value>/error.jsp</value>
-</init-param>
-<init-param>
-			<name>success-jsp</name><value>/success.jsp</value>
-</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<portlet-info>
+            <name>contextConfigLocation</name>
+            <value>/WEB-INF/twitter-portlet.xml</value>
+        </init-param>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+            <portlet-mode>edit</portlet-mode>
+        </supports>
+        		<portlet-info>
 			<title>Twitter Timeline</title>
 			<short-title>Twitter Main Portlet</short-title>
 			<keywords>twitterPortlet</keywords>
 		</portlet-info>
-		<security-role-ref>
+		<portlet-preferences>
+            <preference>
+                <name>pageSize</name>
+                <value>20</value>
+            </preference>
+        </portlet-preferences>
+        		<security-role-ref>
 			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
 		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
@@ -47,23 +43,15 @@
         <portlet>
 		<portlet-name>Twitter Follower</portlet-name>
 		<display-name>Twitter Follower Portlet</display-name>
-		<portlet-class>it.unibz.twitterportlet.TwitterFollower</portlet-class>
+		<portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
 		<init-param>
-			<name>follower-jsp</name><value>/followers.jsp</value>
-</init-param>
-<init-param>
-			<name>edit-jsp</name><value>/edit.jsp</value>
-</init-param>
-<init-param>
-			<name>error-jsp</name><value>/error.jsp</value>
-</init-param>
-<init-param>
-			<name>success-jsp</name><value>/success.jsp</value>
-</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
+            <name>contextConfigLocation</name>
+            <value>/WEB-INF/follower-portlet.xml</value>
+        </init-param>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
 		<portlet-info>
 			<title>Twitter Follower</title>
 			<short-title>Twitter Follower Portlet</short-title>
@@ -71,9 +59,6 @@
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
 		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
@@ -85,21 +70,15 @@
         <portlet>
 		<portlet-name>Twitter Login</portlet-name>
 		<display-name>Twitter Login Portlet</display-name>
-		<portlet-class>it.unibz.twitterportlet.TwitterLogin</portlet-class>
-		
-<init-param>
-			<name>error-jsp</name><value>/error.jsp</value>
-</init-param>
-<init-param>
-			<name>success-jsp</name><value>/success.jsp</value>
-</init-param>
-<init-param>
-			<name>edit-jsp</name><value>/edit.jsp</value>
-</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
+		<portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
+		<init-param>
+            <name>contextConfigLocation</name>
+            <value>/WEB-INF/login-portlet.xml</value>
+        </init-param>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
 		<portlet-info>
 			<title>Twitter Login</title>
 			<short-title>Twitter Login Portlet</short-title>
@@ -107,9 +86,6 @@
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
 		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
