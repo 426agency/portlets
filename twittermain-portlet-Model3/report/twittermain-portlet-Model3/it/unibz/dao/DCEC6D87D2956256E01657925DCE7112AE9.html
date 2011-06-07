@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Interface</TITLE>
+<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style"></HEAD>
+<BODY BGCOLOR="white">
+<!-- ========= START OF NAVBAR ======= -->
+<A NAME="navbar_top"></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1"> &nbsp;<A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Package</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1Rev">    <FONT CLASS="NavBarFont1Rev"><B>Element</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Diagram</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../help.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+<b>NetBeans UML Modeling</b>
+</TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF NAVBAR ========= -->
+
+<HR>
+<H2>
+<FONT SIZE="-1">it::unibz::dao</FONT>
+<BR>
+Interface TwitterDao</H2>
+<PRE>
+<B>it::unibz::dao::TwitterDao</B>
+</PRE>
+<DL>
+<DT><B>All Dependency Clients:</B><DD><IMG SRC="../../../../images/implementation.png" ALT="(Implementation) ">&nbsp;Implementation&nbsp;<A HREF="../../../../twittermain-portlet-Model3/it/unibz/dao/DCE7A16D6CDD602BB2347B1CFD4CDE489DC.html" title="dependency in it::unibz::dao">TwitterDaoHibernate</A></DD>
+</DL>
+<DL>
+<DT><B>All Known Associations: </B><DD><IMG SRC="../../../../images/navigable-aggregation.png" ALT="(Navigable_Aggregation) "> <A HREF="../../../../twittermain-portlet-Model3/it/unibz/service/DCE63C8A3C731533F947E381F91483A1248.html">Navigable_Aggregation</A>: <A HREF="../../../../twittermain-portlet-Model3/it/unibz/service/DCE21393679DAEEA094998CC51D35E27D72.html" title="association in it::unibz::service">TwitterServiceImpl</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public interface <B>TwitterDao</B></DT></DL>
+</PRE>
+
+<!-- =========== PROPERTY SUMMARY =========== -->
+<A NAME="property_summary"></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Properties</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B>Alias</B></TD>
+<TD>TwitterDao</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B>Visibility</B></TD>
+<TD>public</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B>Final</B></TD>
+<TD><IMG src="../../../../images/unchecked.png" border=n></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B>Transient</B></TD>
+<TD><IMG src="../../../../images/checked.png" border=n></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B>Abstract</B></TD>
+<TD><IMG src="../../../../images/checked.png" border=n></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B>Leaf</B></TD>
+<TD><IMG src="../../../../images/unchecked.png" border=n></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== OPERATION SUMMARY =========== -->
+<A NAME="operation_summary"></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Operation Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE><A HREF="../../../../twittermain-portlet-Model3/DCE73EFF15335C942F96112BE16F71F2C55.html">int</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="#saveTweets">saveTweets</A></B>(<A HREF="../../../../twittermain-portlet-Model3/twitter4j/DCE1697D19FFB0ADF118C667E6555A63DE1.html">Status</A>&nbsp;tweets[0..*],&nbsp;<A HREF="../../../../twittermain-portlet-Model3/DCE0F26D996151232ED72EE61F2967F3D19.html">String</A>&nbsp;user,&nbsp;<A HREF="../../../../twittermain-portlet-Model3/DCE73EFF15335C942F96112BE16F71F2C55.html">int</A>&nbsp;pagination)</CODE><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE><A HREF="../../../../twittermain-portlet-Model3/DCECBF96A066386B444485F30A246A7C6E4.html">void</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="#storeAccesstoken">storeAccesstoken</A></B>(<A HREF="../../../../twittermain-portlet-Model3/DCE0F26D996151232ED72EE61F2967F3D19.html">String</A>&nbsp;token,&nbsp;<A HREF="../../../../twittermain-portlet-Model3/DCE0F26D996151232ED72EE61F2967F3D19.html">String</A>&nbsp;tokenSecret,&nbsp;<A HREF="../../../../twittermain-portlet-Model3/DCE6301C4CBA91DBE51F126C174ED9FF0C8.html">long</A>&nbsp;userId)</CODE><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE><A HREF="../../../../twittermain-portlet-Model3/twitter4j/auth/DCE34454FB8268056DA51C8C75C397EE2AC.html">AccessToken</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="#loadAccessToken">loadAccessToken</A></B>(<A HREF="../../../../twittermain-portlet-Model3/DCE6301C4CBA91DBE51F126C174ED9FF0C8.html">long</A>&nbsp;useId)</CODE><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE><A HREF="../../../../twittermain-portlet-Model3/DCECBF96A066386B444485F30A246A7C6E4.html">void</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="#logout">logout</A></B>(<A HREF="../../../../twittermain-portlet-Model3/DCE6301C4CBA91DBE51F126C174ED9FF0C8.html">long</A>&nbsp;userId)</CODE><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== STEREOTYPE SUMMARY =========== -->
+
+<A NAME="stereotype_summary"></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Stereotype Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="left" VALIGN="top" WIDTH="15%">
+interface
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== OPERATION DETAIL =========== -->
+
+<A NAME="operationr_detail"></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Operation Detail</B></FONT></TH>
+</TR>
+</TABLE>
+<A NAME="saveTweets"></A><H3>saveTweets</H3>
+<PRE>
+public abstract <A HREF="../../../../twittermain-portlet-Model3/DCE73EFF15335C942F96112BE16F71F2C55.html">int</A> <B>saveTweets</B>(<A HREF="../../../../twittermain-portlet-Model3/twitter4j/DCE1697D19FFB0ADF118C667E6555A63DE1.html">Status</A>&nbsp;tweets[0..*],&nbsp;<A HREF="../../../../twittermain-portlet-Model3/DCE0F26D996151232ED72EE61F2967F3D19.html">String</A>&nbsp;user,&nbsp;<A HREF="../../../../twittermain-portlet-Model3/DCE73EFF15335C942F96112BE16F71F2C55.html">int</A>&nbsp;pagination)</PRE>
+<DL>
+<DD>
+<P>
+</DD></DL>
+<HR>
+<A NAME="storeAccesstoken"></A><H3>storeAccesstoken</H3>
+<PRE>
+public abstract <A HREF="../../../../twittermain-portlet-Model3/DCECBF96A066386B444485F30A246A7C6E4.html">void</A> <B>storeAccesstoken</B>(<A HREF="../../../../twittermain-portlet-Model3/DCE0F26D996151232ED72EE61F2967F3D19.html">String</A>&nbsp;token,&nbsp;<A HREF="../../../../twittermain-portlet-Model3/DCE0F26D996151232ED72EE61F2967F3D19.html">String</A>&nbsp;tokenSecret,&nbsp;<A HREF="../../../../twittermain-portlet-Model3/DCE6301C4CBA91DBE51F126C174ED9FF0C8.html">long</A>&nbsp;userId)</PRE>
+<DL>
+<DD>
+<P>
+</DD></DL>
+<HR>
+<A NAME="loadAccessToken"></A><H3>loadAccessToken</H3>
+<PRE>
+public abstract <A HREF="../../../../twittermain-portlet-Model3/twitter4j/auth/DCE34454FB8268056DA51C8C75C397EE2AC.html">AccessToken</A> <B>loadAccessToken</B>(<A HREF="../../../../twittermain-portlet-Model3/DCE6301C4CBA91DBE51F126C174ED9FF0C8.html">long</A>&nbsp;useId)</PRE>
+<DL>
+<DD>
+<P>
+</DD></DL>
+<HR>
+<A NAME="logout"></A><H3>logout</H3>
+<PRE>
+public abstract <A HREF="../../../../twittermain-portlet-Model3/DCECBF96A066386B444485F30A246A7C6E4.html">void</A> <B>logout</B>(<A HREF="../../../../twittermain-portlet-Model3/DCE6301C4CBA91DBE51F126C174ED9FF0C8.html">long</A>&nbsp;userId)</PRE>
+<DL>
+<DD>
+<P>
+</DD></DL>
+
+<HR>
+<!-- ========= START OF NAVBAR ======= -->
+<A NAME="navbar_top"></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1"> &nbsp;<A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Package</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1Rev">    <FONT CLASS="NavBarFont1Rev"><B>Element</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Diagram</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../help.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+<b>NetBeans UML Modeling</b>
+</TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF NAVBAR ========= -->
+
+</BODY>
+</HTML>

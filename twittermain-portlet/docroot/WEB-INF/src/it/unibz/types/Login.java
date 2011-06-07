@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package it.unibz.types;
 
 import java.io.Serializable;
@@ -13,8 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- *
- * @author user
+ * Class represents the Login entity composed by
+ * accesstoken and key for specific user-baseID
  */
 @Entity
 @SuppressWarnings("serial")
@@ -51,7 +46,7 @@ public class Login implements Serializable{
   }
 
   /**
-   * @param string Sets the Tweet
+   * @param string 
    */
   public void setaccesstoken(String string) {
     accesstoken = string;

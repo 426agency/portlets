@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package it.unibz.types;
 
 import java.io.Serializable;
@@ -12,6 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Class represents the Tweet Entity, composed by
+ * Author,Message,TwitterTweetID,Username
+ */
 @Entity
 @SuppressWarnings("serial")
 public class Tweets implements Serializable {

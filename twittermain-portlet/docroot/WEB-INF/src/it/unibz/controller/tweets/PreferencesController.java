@@ -16,6 +16,9 @@ import org.springframework.web.portlet.ModelAndView;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 
+/**
+ * Class represents the Edit portion for the TwitterTimeline Portlet
+ */
 @Controller
 @RequestMapping("EDIT")
 public class PreferencesController  {
@@ -30,6 +33,13 @@ public class PreferencesController  {
     return command;
   }
 
+    /**
+     * Handles and render requests.
+     * @param request
+     * @param response
+     * @return Model to show
+     * @throws Exception
+     */
     @RenderMapping
   protected ModelAndView handleRenderRequestInternal(RenderRequest request,
       RenderResponse response) throws Exception {

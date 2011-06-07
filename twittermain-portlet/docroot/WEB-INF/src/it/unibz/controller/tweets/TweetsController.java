@@ -26,75 +26,86 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
+/**
+ * Class represents the render and actionhandler for the TwitterTimeline Portlet
+ */
 @RequestMapping("view")
 @Controller
-public class TweetsController
-     {    
+public class TweetsController {
 
+    /**
+     * Handles and render requests.
+     * If it comes after an action, the model is appropriately filled
+     * with information messages if needed.
+     * Its main task is to fetch new tweets and to send them to the service
+     * which stores them and returns the number of new tweets.
+     * It adds to the Model the list of statuses to output.
+     * @param request
+     * @param response
+     * @return Model to show
+     * @throws Exception
+     */
     @RenderMapping
-  protected 
-      ModelAndView handleRenderRequestInternal(
-          RenderRequest request, 
-          RenderResponse response) 
-          throws Exception {    
-Map model = new HashMap();
-    User u = ControllerUtil.getUser(request);
-    List<Status> statuses = new ArrayList<Status>();
-    int num=0;
-     if(u==null||u.getEmailAddress().contains("guest")||twitterService.loadAccessToken(u.getUserId())==null){
-              //include(errorJSP,renderRequest,renderResponse);
-         model.put("toprint", "error");
-         //System.out.println("cannot get user"+u==null?"isnull":u.getEmailAddress());
-     }
- else{
-    
-
+    protected ModelAndView handleRenderRequestInternal(
+            RenderRequest request,
+            RenderResponse response)
+            throws Exception {
+        Map model = new HashMap();
+        User u = ControllerUtil.getUser(request);
+        List<Status> statuses = new ArrayList<Status>();
+        int num = 0;
+        if (u == null || u.getEmailAddress().contains("guest") || twitterService.loadAccessToken(u.getUserId()) == null) {
+            model.put("toprint", "error");
+        } else {
             try {
                 Twitter twit = twitterService.getTwitter(u.getUserId());
                 Paging p = new Paging(1, Integer.parseInt(request.getPreferences().getValue(
-            "pageSize",
-            PreferencesCommand.DEFAULT_PAGE_SIZE)));
+                        "pageSize",
+                        PreferencesCommand.DEFAULT_PAGE_SIZE)));
                 statuses = twit.getHomeTimeline(p);
-                
-                num= twitterService.saveTweets(statuses,twit.getScreenName(),Integer.parseInt(request.getPreferences().getValue(
-            "pageSize", 
-            PreferencesCommand.DEFAULT_PAGE_SIZE)));
-                //renderRequest.setAttribute("numtweets", num);
-                //message+="you have "+num+" new tweets";
+
+                num = twitterService.saveTweets(statuses, twit.getScreenName(), Integer.parseInt(request.getPreferences().getValue(
+                        "pageSize",
+                        PreferencesCommand.DEFAULT_PAGE_SIZE)));
             } catch (TwitterException ex) {
-                //Logger.getLogger(TwitterMain.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-      
-    model.put("stats", statuses);
-    //model.put("actionName", "tweetList");
-    model.put("numtweets", num);
-    model.put("pageSize", 
-        request.getPreferences().getValue(
-            "pageSize", 
-            PreferencesCommand.DEFAULT_PAGE_SIZE));
 
-    return new ModelAndView("tweetList", model);
+        model.put("stats", statuses);
+        model.put("numtweets", num);
+        model.put("pageSize",
+                request.getPreferences().getValue(
+                "pageSize",
+                PreferencesCommand.DEFAULT_PAGE_SIZE));
 
-  }
+        return new ModelAndView("tweetList", model);
 
-    @ActionMapping
-  protected void handleActionRequestInternal(ActionRequest request, ActionResponse response)
-      throws Exception {
-    if(request.getParameter("tweettext")!=null&&!request.getParameter("tweettext").isEmpty())
-            {
-
-               User u = ControllerUtil.getUser(request);
-
-                twitterService.getTwitter(u.getUserId()).updateStatus(request.getParameter("tweettext"));
-        }
     }
 
-  private TwitterService twitterService;
-    @Resource (name="twitterService")
+    /**
+     * Method handles action Requests
+     * It handles the tweet actions to post messages
+     * and then sends render impulse
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @ActionMapping
+    protected void handleActionRequestInternal(ActionRequest request, ActionResponse response)
+            throws Exception {
+        if (request.getParameter("tweettext") != null && !request.getParameter("tweettext").isEmpty()) {
+
+            User u = ControllerUtil.getUser(request);
+
+            twitterService.getTwitter(u.getUserId()).updateStatus(request.getParameter("tweettext"));
+        }
+    }
+    private TwitterService twitterService;
+
+    @Resource(name = "twitterService")
     @Required
-  public void setTwitterService(
-      TwitterService twitterService) {
-    this.twitterService = twitterService;
-  }
+    public void setTwitterService(
+            TwitterService twitterService) {
+        this.twitterService = twitterService;
+    }
 }

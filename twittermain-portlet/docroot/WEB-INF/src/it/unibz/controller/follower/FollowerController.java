@@ -1,4 +1,5 @@
 package it.unibz.controller.follower;
+
 import com.liferay.portal.model.User;
 import it.unibz.controller.ControllerUtil;
 import java.util.HashMap;
@@ -22,122 +23,118 @@ import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.auth.RequestToken;
 
+/**
+ * Class represents the render and actionhandler for the Follower Portlet
+ */
 @RequestMapping("view")
 @Controller
-public class FollowerController  {
-  
+public class FollowerController {
 
+    protected void handleAction(
+            ActionRequest request,
+            ActionResponse response,
+            Object command,
+            BindException bindException)
+            throws Exception {
+    }
 
-  protected void handleAction(
-      ActionRequest request, 
-      ActionResponse response, 
-      Object command, 
-      BindException bindException) 
-      throws Exception {
-  }
-
-          private RequestToken rt=null;
-        private Twitter t=null;
-
-         private boolean testNullOrEmpty(String sz) {
-        if(sz!=null && !sz.equals(""))
+    private boolean testNullOrEmpty(String sz) {
+        if (sz != null && !sz.equals("")) {
             return false;
-        else
+        } else {
             return true;
-    }
-
-@RenderMapping
- ModelAndView handleRenderRequestInternal(
-          RenderRequest request,
-          RenderResponse response)
-          throws Exception {
-      Map model = new HashMap();
-       User u = ControllerUtil.getUser(request);
-String msg=request.getParameter("msg");
-        if(!testNullOrEmpty(msg))
-            model.put("msg",msg);
-       String message="";
-      if(u==null||u.getEmailAddress().contains("guest")||twitterService.loadAccessToken(u.getUserId())==null){
-             //include(errorJSP,renderRequest,renderResponse);
-model.put("errormsg", "error");
-     }
- else{
-
-        try {
-            // Status status = twitter.updateStatus(args[1]);
-            message+="<table>";
-            Twitter twit=twitterService.getTwitter(u.getUserId());
-            long[] arrayLngIDs = twit.getFriendsIDs(-1).getIDs();
-            PortletURL action = response.createActionURL();
-            twitter4j.User twitteruser =null;
-            for(int i=0;i<arrayLngIDs.length;i++){
-                twitteruser = twit.showUser(arrayLngIDs[i]);
-                action = response.createActionURL();
-                action.setParameter("followerID",String.valueOf(arrayLngIDs[i]) );
-    message+="<tr><td>"+twitteruser.getScreenName()+"</td><td><a href=\""+action.toString()+
-            "\"><img src=\"/twitterfollower-portlet/images/trash.gif\" border=\"0\""
-            + " title=\"Unfollow\"></a></td></tr>";
-            }
-            message+="</table>";
-        } catch (TwitterException ex) {
-            message="";
-            //Logger.getLogger(TwitterFollower.class.getName()).log(Level.SEVERE, null, ex);
         }
-//    PortletURL au = renderResponse.createActionURL();
-//    renderRequest.setAttribute("actionURL", au.toString());
-//    renderResponse.getWriter().append(message);
-//        include(viewJSP, renderRequest, renderResponse);
+    }
+
+    /**
+     * Handles and render requests.
+     * If it comes after an action, the model is appropriately filled
+     * with information messages if needed.
+     * Main task is to prepare the message containing the list of
+     * followers to output.
+     * @param request
+     * @param response
+     * @return Model to show
+     * @throws Exception
+     */
+    @RenderMapping
+    ModelAndView handleRenderRequestInternal(
+            RenderRequest request,
+            RenderResponse response)
+            throws Exception {
+        Map model = new HashMap();
+        User u = ControllerUtil.getUser(request);
+        String msg = request.getParameter("msg");
+        if (!testNullOrEmpty(msg)) {
+            model.put("msg", msg);
+        }
+        String message = "";
+        if (u == null || u.getEmailAddress().contains("guest") || twitterService.loadAccessToken(u.getUserId()) == null) {
+            model.put("errormsg", "error");
+        } else {
+
+            try {
+                // Status status = twitter.updateStatus(args[1]);
+                message += "<table>";
+                Twitter twit = twitterService.getTwitter(u.getUserId());
+                long[] arrayLngIDs = twit.getFriendsIDs(-1).getIDs();
+                PortletURL action = response.createActionURL();
+                twitter4j.User twitteruser = null;
+                for (int i = 0; i < arrayLngIDs.length; i++) {
+                    twitteruser = twit.showUser(arrayLngIDs[i]);
+                    action = response.createActionURL();
+                    action.setParameter("followerID", String.valueOf(arrayLngIDs[i]));
+                    message += "<tr><td>" + twitteruser.getScreenName() + "</td><td><a href=\"" + action.toString()
+                            + "\"><img src=\"/twitterfollower-portlet/images/trash.gif\" border=\"0\""
+                            + " title=\"Unfollow\"></a></td></tr>";
+                }
+                message += "</table>";
+            } catch (TwitterException ex) {
+                message = "";
+            }
+        }
+
+
+        model.put("toprint", message);
+        return new ModelAndView(
+                "followers", model);
+    }
+
+    /**
+     * Method handles action Requests
+     * It handles the follow and unfollow actions
+     * and then sends render impulse
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @ActionMapping
+    protected void handleActionRequestInternal(ActionRequest request, ActionResponse response)
+            throws Exception {
+
+        User u = ControllerUtil.getUser(request);
+        if (request.getParameter("followerID") != null) {
+            twitterService.getTwitter(u.getUserId()).destroyFriendship(Integer.parseInt(request.getParameter("followerID")));
+        }
+
+        if (request.getParameter("followername") != null) {
+            String followerName = request.getParameter("followername");
+            try {
+                twitterService.getTwitter(u.getUserId()).createFriendship(followerName);
+            } catch (TwitterException ex) {
+                response.setRenderParameter("msg", "Unable to follow user: " + followerName);
+            }
+
+        }
 
     }
-                
-      
-       
-       model.put("toprint", message);
-    return new ModelAndView(
-        "followers", model);
-  }
-  
- @ActionMapping
-  protected void handleActionRequestInternal(ActionRequest request, ActionResponse response)
-      throws Exception {
-    
+    private TwitterService twitterService;
 
-
-                User u = ControllerUtil.getUser(request);
-               if(request.getParameter("followerID")!=null)
-            {
-        //    try {
-
-                twitterService.getTwitter(u.getUserId()).destroyFriendship(Integer.parseInt(request.getParameter("followerID")));
-      //      } catch (TwitterException ex) {
-              //  Logger.getLogger(TwitterFollower.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            if(request.getParameter("followername")!=null)
-            {
-                 String followerName = request.getParameter("followername");
-                 try {
-                    twitterService.getTwitter(u.getUserId()).createFriendship(followerName);
-            } catch (TwitterException ex) {
-                response.setRenderParameter("msg", "Unable to follow user: "+followerName);
-
-               // Logger.getLogger(TwitterFollower.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            }
-            
-     
-  }
-
-
-  private TwitterService twitterService;
-
-     @Resource (name="twitterService")
+    @Resource(name = "twitterService")
     @Required
-     public void setTwitterService(
-      TwitterService twitterService) {
-    this.twitterService = twitterService;
-  }
+    public void setTwitterService(
+            TwitterService twitterService) {
+        this.twitterService = twitterService;
+    }
 }
